@@ -1,0 +1,9 @@
+On MLP
+=========
+Fails on drawn digits because(97% accuracy on test data):
+- MLP is sensitive to pixel positions
+- Real drawings are noisy / off-center
+
+on CNN
+=============
+99%
