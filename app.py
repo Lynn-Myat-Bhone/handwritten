@@ -12,8 +12,8 @@ from scipy.ndimage.interpolation import zoom
 # -----------------------------
 model = load_model("handwritten_cnn.keras")
 
-st.set_page_config(page_title="MNIST Live Digit Recognizer", layout="centered")
-st.title("Digit Recognizer")
+st.set_page_config(page_title=" Digit Recognizer", layout="centered")
+st.title("Digit Recognizer ")
 
 # -----------------------------
 # Preprocess Canvas Drawing
