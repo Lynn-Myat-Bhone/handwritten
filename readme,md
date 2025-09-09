@@ -1,0 +1,132 @@
+# Handwritten Digit Recognition
+
+This project is a web app for recognizing handwritten digits using a Convolutional Neural Network (CNN) trained on grayscale images of digits (28x28 pixels). The app is built with Streamlit and allows users to draw digits on a canvas and get instant predictions.
+
+# Exploratory Data Analysis (EDA) – MNIST Handwritten Digits
+
+## 1. Dataset Overview
+- The dataset contains **42,000 grayscale images** of handwritten digits.
+- Each image is **28×28 pixels**, flattened into 784 features.
+- Labels range from **0 to 9**.
+- Pixel values are integers in the range **0–255**.
+
+**Purpose of EDA:** To explore the dataset’s structure, understand distributions, and identify key patterns before modeling.
+
+---
+
+## 2. Label Distribution
+- The dataset is **well-balanced** across all digits.
+- Each digit has roughly the same number of samples.
+- **Insight:** No class imbalance; models can be trained without additional class weighting.
+
+---
+
+## 3. Sample Images
+- Random samples of digits show high **variation in handwriting style, stroke thickness, and orientation**.
+- **Insight:** Preprocessing like normalization, centering, and resizing is important to reduce variability.
+
+---
+
+## 4. Dimensionality Reduction (PCA)
+- Reducing the 784-dimensional pixel space to 2D reveals **clusters of digits**.
+- Digits like **0 and 1** form distinct clusters, while **3, 8, and 9** tend to overlap.
+- **Insight:** Some digits are visually similar, which explains typical misclassifications.
+
+---
+
+## 5. Pixel Correlation
+- Neighboring pixels are highly correlated.
+- **Insight:** Spatial relationships are important; convolutional neural networks (CNNs) can exploit these correlations effectively.
+
+---
+
+## 6. Key Patterns Observed
+1. Straight-line digits (e.g., 1, 7) are easier to classify.
+2. Rounded digits (e.g., 3, 8, 9) often overlap in feature space.
+3. Preprocessing (normalization, centering, resizing) is crucial for model accuracy.
+4. The dataset is rich enough for both CNNs and classical machine learning methods, with careful feature engineering.
+
+---
+
+## 7. Summary
+EDA helped us understand:
+- **Dataset structure and quality**
+- **Class balance**
+- **Variability in handwriting**
+- **Confusing digits**
+- **Importance of preprocessing and spatial feature extraction**
+
+**Next Steps:** Use these insights to guide **feature engineering, model selection, and evaluation**.
+
+## Project Structure
+
+- `app.py` — Streamlit web app for digit recognition.
+- `model.ipynb` — Jupyter notebook for data analysis, model training, and evaluation.
+- `handwritten_cnn.keras` — Saved trained CNN model.
+- `requirements.txt` — Python dependencies.
+- `dataset/Train.csv` — Training data (labels + pixel values).
+- `dataset/test.csv` — Test data (pixel values only).
+- `save_model/` — Additional saved models.
+
+## How It Works
+
+1. **Data Preparation:**  
+   - Training data is loaded from `dataset/Train.csv`.
+   - Images are normalized and reshaped to `(28, 28, 1)` for grayscale input.
+   - Labels are one-hot encoded.
+
+2. **Model Architecture:**  
+   - Sequential CNN with:
+     - Conv2D → MaxPooling2D → Conv2D → MaxPooling2D → Flatten → Dense(128, relu) → Dense(10, softmax)
+   - Trained for 10 epochs with Adam optimizer and categorical crossentropy loss.
+
+3. **Web App:**  
+   - Users draw a digit on the canvas.
+   - The drawing is preprocessed (grayscale, resized, normalized).
+   - The CNN model predicts the digit and displays the result.
+
+## Getting Started
+
+### 1. Install Dependencies
+
+```sh
+pip install -r requirements.txt
+```
+
+### 2. Train the Model (Optional)
+
+Open [model.ipynb](d:/handwritten/model.ipynb) and run all cells to train and save the model as `handwritten_cnn.keras`.
+
+### 3. Run the Web App
+
+```sh
+streamlit run app.py
+```
+
+### 4. Usage
+
+- Draw a digit (0–9) on the canvas.
+- The app will display its prediction.
+
+## Model Performance
+
+- Achieves ~99% accuracy on validation set.
+- Confusion matrix and classification report are available in [model.ipynb](d:/handwritten/model.ipynb).
+
+## Files
+
+- [app.py](d:/handwritten/app.py): Streamlit app source.
+- [model.ipynb](d:/handwritten/model.ipynb): Model training notebook.
+- [dataset/Train.csv](d:/handwritten/dataset/Train.csv): Training data.
+- [dataset/test.csv](d:/handwritten/dataset/test.csv): Test data.
+
+## Requirements
+
+- Python 3.12+
+- TensorFlow/Keras
+- Streamlit
+- NumPy, Pandas, Matplotlib, Seaborn, scikit-learn, Pillow
+
+## License
+
+MIT License (add your license)
